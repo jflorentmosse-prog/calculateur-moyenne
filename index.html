@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculateur de moyenne</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Calculateur de moyenne</h1>
+
+    <section class="carte">
+      <div class="ligne">
+        <select id="mode">
+          <option value="universite">Mode Université (avec UE)</option>
+          <option value="lycee">Mode Lycée</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- ===== MODE UNIVERSITÉ ===== -->
+    <div id="modeUniversite">
+      <section class="carte">
+        <h2>1. Ajouter une UE</h2>
+        <div class="ligne">
+          <input id="nomUE" placeholder="Nom de l'UE (ex : Programmation)">
+          <button id="btnUE">Ajouter l'UE</button>
+        </div>
+      </section>
+
+      <section class="carte">
+        <h2>2. Ajouter une matière</h2>
+        <div class="ligne">
+          <select id="choixUE"></select>
+          <input id="nomMatiere" placeholder="Matière">
+          <input id="note" type="number" placeholder="Note /20" min="0" max="20" step="0.01">
+          <input id="coef" type="number" placeholder="Coef" min="1" step="1">
+          <button id="btnMatiere">Ajouter</button>
+        </div>
+      </section>
+
+      <section class="carte">
+        <h2>3. Simulation : quelle note pour valider ?</h2>
+        <div class="ligne">
+          <select id="simUE"></select>
+          <input id="simCoef" type="number" placeholder="Coef de la matière restante" min="1" step="1">
+          <input id="simCible" type="number" placeholder="Moyenne visée (10 par défaut)" min="0" max="20" step="0.01">
+          <button id="btnSim">Calculer</button>
+        </div>
+        <p id="simResultat"></p>
+      </section>
+
+      <section class="carte">
+        <h2>4. Compensation entre UE</h2>
+        <div class="ligne">
+          <label><input type="checkbox" id="compActive"> Activer la compensation</label>
+          <input id="compSeuil" type="number" placeholder="Moyenne minimale d'une UE (8 par défaut)" min="0" max="10" step="0.01">
+        </div>
+        <p class="aide">Une UE dont la moyenne est comprise entre ce minimum et 10 est validée par compensation si la moyenne générale du semestre est d'au moins 10.</p>
+      </section>
+
+      <section id="resultats"></section>
+
+      <section class="carte total">
+        <h2 id="moyenneGenerale"></h2>
+        <p id="statutSemestre"></p>
+        <button id="reset" class="danger">Tout effacer</button>
+      </section>
+    </div>
+
+    <!-- ===== MODE LYCÉE ===== -->
+    <div id="modeLycee" hidden>
+      <section class="carte">
+        <h2>Ajouter une matière</h2>
+        <div class="ligne">
+          <input id="lNom" placeholder="Matière (ex : Mathématiques)">
+          <input id="lDevoirs" placeholder="Devoirs (ex : 12 14,5 9)">
+          <input id="lCompo" type="number" placeholder="Composition /20" min="0" max="20" step="0.01">
+          <input id="lCoef" type="number" placeholder="Coef" min="1" step="1">
+          <button id="lAjouter">Ajouter</button>
+        </div>
+        <p class="aide">Note de la matière = moyenne des devoirs × 50 % + composition × 50 %. Séparez les devoirs par des espaces ou des points-virgules. Vous pouvez saisir uniquement les devoirs ou uniquement la composition.</p>
+      </section>
+
+      <section class="carte">
+        <h2>Mes matières</h2>
+        <ul id="lListe"></ul>
+      </section>
+
+      <section class="carte total">
+        <h2 id="lMoyenne"></h2>
+        <p id="lMention"></p>
+        <button id="lReset" class="danger">Tout effacer</button>
+      </section>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
